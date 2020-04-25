@@ -7,3 +7,10 @@ export const signUpSchema = Yup.object().shape({
     .email('Digite um e-mail válido'),
   password: Yup.string().min(6, 'Mínimo 6 dígitos'),
 });
+
+export const signInSchema = Yup.object().shape({
+  email: Yup.string()
+    .required('E-mail obrigatório')
+    .email('Digite um e-mail válido'),
+  password: Yup.string().required('Senha obrigatória'),
+});

@@ -7,8 +7,8 @@ import { Container, Content, Background } from './styles';
 import logoImg from '../../assets/logo.svg';
 import Input from '../../components/Input';
 import Button from '../../components/Button';
-import { signUpSchema } from '../../utils/schemas/signup';
 import getValidationErrors from '../../utils/getValidationErrors';
+import { signUpSchema } from '../../utils/yup.schemas';
 
 const SignUp: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
