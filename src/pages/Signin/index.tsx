@@ -9,7 +9,7 @@ import Input from '../../components/Input';
 import Button from '../../components/Button';
 import getValidationErrors from '../../utils/getValidationErrors';
 import { signInSchema } from '../../utils/yup.schemas';
-import { AuthContext } from '../../context/AuthContext';
+import { useAuth } from '../../context/AuthContext';
 
 interface SiginFormData {
   email: string;
@@ -18,7 +18,7 @@ interface SiginFormData {
 
 const SignIn: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
-  const { signIn } = useContext(AuthContext);
+  const { signIn, user } = useAuth();
 
   const handleSubmit = useCallback(
     async (data: SiginFormData) => {
