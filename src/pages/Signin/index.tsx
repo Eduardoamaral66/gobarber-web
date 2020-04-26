@@ -10,7 +10,8 @@ import Input from '../../components/Input';
 import Button from '../../components/Button';
 import getValidationErrors from '../../utils/getValidationErrors';
 import { signInSchema } from '../../utils/yup.schemas';
-import { useAuth } from '../../hooks/AuthContext';
+import { useAuth } from '../../hooks/auth';
+import { useToast } from '../../hooks/toast';
 
 interface SiginFormData {
   email: string;
@@ -20,6 +21,7 @@ interface SiginFormData {
 const SignIn: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
   const { signIn, user } = useAuth();
+  const { addToast } = useToast();
 
   const handleSubmit = useCallback(
     async (data: SiginFormData) => {
@@ -27,15 +29,20 @@ const SignIn: React.FC = () => {
       try {
         const schema = signInSchema;
         await schema.validate(data, { abortEarly: false });
-        signIn({ email: data.email, password: data.password });
+        await signIn({ email: data.email, password: data.password });
       } catch (err) {
         if (err instanceof ValidationError) {
           const errors = getValidationErrors(err);
           formRef.current?.setErrors(errors);
         }
+        addToast({
+          type: 'error',
+          title: 'Erro na autenticação',
+          description: 'Ocorreu um erro ao fazer login, cheque as credenciais.',
+        });
       }
     },
-    [signIn],
+    [addToast, signIn],
   );
 
   return (
