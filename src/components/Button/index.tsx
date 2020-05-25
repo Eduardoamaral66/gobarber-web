@@ -1,11 +1,20 @@
 import React, { ButtonHTMLAttributes } from 'react';
+import { AiOutlineReload } from 'react-icons/ai';
 import { Container } from './styles';
 
-type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement>;
+type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
+  loading?: boolean;
+};
 
-const Button: React.FC<ButtonProps> = ({ children, ...rest }) => (
+const Button: React.FC<ButtonProps> = ({ children, loading, ...rest }) => (
   <Container type="button" {...rest}>
-    {children}
+    {loading ? (
+      <>
+        <AiOutlineReload className="fa-spin" /> Carregando...
+      </>
+    ) : (
+      children
+    )}
   </Container>
 );
 
