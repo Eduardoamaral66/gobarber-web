@@ -20,3 +20,11 @@ export const forgotPasswordSchema = Yup.object().shape({
     .required('E-mail obrigatório')
     .email('Digite um e-mail válido'),
 });
+
+export const resetPasswordSchema = Yup.object().shape({
+  password: Yup.string().required('Senha obrigatória'),
+  password_confirmation: Yup.string().oneOf(
+    [Yup.ref('password'), null],
+    'Confirmação incorreta',
+  ),
+});
