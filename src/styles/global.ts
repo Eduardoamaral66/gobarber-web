@@ -14,6 +14,10 @@ export default createGlobalStyle`
     -webkit-font-smoothing: antialiased;
   }
 
+  img {
+    object-fit: cover;
+  }
+
 body, input, button {
   font-family: 'Roboto Slab', serif;
   font-size: 16px;
